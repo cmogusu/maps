@@ -1,4 +1,4 @@
-import GeocodePlaces from '../../components/geocodePlaces.js';
+import GeocodePlaces from '../../components/GeocodePlaces.js';
 import {markets} from '../../components/places.js';
 
 

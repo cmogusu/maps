@@ -1,25 +1,67 @@
-//import {createMap,createInfoWindow,createMarker} from './components/functions.js';
-import {markets} from './components/places.js';
-import {difference,uniq} from 'lodash';
+import {difference,uniq,isArray} from 'lodash';
 
-class Start{
-	constructor( places, start, end ){
-		this.index = start;
-		this.fetchLimit = end;
+class GeocodePlaces{
+	constructor( geocoder ){
+		this.setStart(0);
+		this.setEnd(10);
+		this.setPlaces([]);
+		this.placeResults = []
+
+		if( geocoder ){
+			this.setGeocoder(geocoder);
+		}
+
+		
 		this.init = this.init.bind(this);
 		this.geocodePlace = this.geocodePlace.bind(this);
 		this.processResults = this.processResults.bind(this);
 
-		this.places = places;
-		this.placeResults = [];
+		window.initMap = this.init;
+	}
+
+
+	setPlaces( places ){
+		if( !isArray(places) ){
+			throw 'Places should be array. ' + typeof places + ' was set';
+		}
+
+		places = places.map( this.removeDay );
+		this.places = uniq( places );
+
+		return this.places;
+	}
+
+	getPlaces(){
+		return this.places;
+	}
+
+	setStart( start ){
+		return this.index = start;
+	}
+
+
+	getStart(){
+		return this.index;
+	}
+
+
+	setEnd( end ){
+		return this.fetchLimit = end;
+	}
+
+
+	getEnd(){
+		return this.fetchLimit;
+	}
+
+
+	setGeocoder( geocoder ){
+		this.geocoder = geocoder;
 	}
 
 
 	init(){
-		this.places = this.places.map( this.removeDay );
-		this.places = uniq( this.places );
-		
-		this.geocoder = new window.google.maps.Geocoder();
+		this.setGeocoder( new window.google.maps.Geocoder() );
 		this.geocodePlace();
 	}
 
@@ -29,7 +71,7 @@ class Start{
 
 		if( this.index>this.places.length-1 || this.index>limit ){
 			this.showResults();
-			console.log('finished');
+
 			return false;
 		}
 
@@ -40,23 +82,11 @@ class Start{
 			region : 'US'
 		};
 
-		
-		setTimeout( ()=>{
-			let dummyResults = [{
-				place_id : 'erjekwe',
-				geometry : {
-					location : {
-						lat : ()=> 30,
-						lng : ()=> 50
-					}
-				}
-			}];
+		if( !this.geocoder ){
+			throw 'Geocoder not set up';
+		}
 
-			this.processResults( dummyResults, 'OK' )
-		},500)
-		
-		
-		//this.geocoder.geocode( options, this.processResults );
+		this.geocoder.geocode( options, this.processResults );
 	}
 
 
@@ -67,11 +97,11 @@ class Start{
 				placeId : results[0].place_id,
 				latLng : {
 					lat : results[0].geometry.location.lat(),
-					lng : results[0].geometry.location.lat(),
+					lng : results[0].geometry.location.lng(),
 				}
 			})
 			
-			console.log( 'geocoded index ' + this.index );
+			//console.log( 'geocoded index ' + this.index );
 
 			this.index++;
 
@@ -111,6 +141,4 @@ class Start{
 	}
 }
 
-
-const start = new Start( markets, 0,1 );
-window.initMap = start.init;
+export default GeocodePlaces;
