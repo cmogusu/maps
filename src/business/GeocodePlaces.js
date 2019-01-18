@@ -11,7 +11,6 @@ class GeocodePlaces{
 			this.setGeocoder(geocoder);
 		}
 
-		
 		this.init = this.init.bind(this);
 		this.geocodePlace = this.geocodePlace.bind(this);
 		this.processResults = this.processResults.bind(this);
@@ -22,7 +21,7 @@ class GeocodePlaces{
 
 	setPlaces( places ){
 		if( !isArray(places) ){
-			throw 'Places should be array. ' + typeof places + ' was set';
+			throw new Error('Places should be array. ' + typeof places + ' was set');
 		}
 
 		places = places.map( this.removeDay );
@@ -83,7 +82,7 @@ class GeocodePlaces{
 		};
 
 		if( !this.geocoder ){
-			throw 'Geocoder not set up';
+			throw new Error('Geocoder not set up');
 		}
 
 		this.geocoder.geocode( options, this.processResults );
@@ -142,3 +141,10 @@ class GeocodePlaces{
 }
 
 export default GeocodePlaces;
+
+/*
+To run, add google maps script to page and use 
+const gp = new GeocodePlaces();
+gp.setEnd( 100 );
+gp.setPlaces( markets );
+*/

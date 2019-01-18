@@ -1,10 +1,17 @@
-import {createMap, createMarker} from './components/functions.js';
-import {markets} from './components/marketsData.js';
+console.log('i\'m alive');
+
+
+/*
+import {createMap, createMarker} from './business/functions.js';
+import {markets} from './business/marketsData.js';
 
 
 class Start{
 	constructor(){
 		this.markers = [];
+
+		window.initMap = this.init.bind(this);
+		console.log('hello world')
 	}
 
 
@@ -13,19 +20,12 @@ class Start{
 		let mapElement = document.getElementById('map');
 
 		let map = createMap( google, mapElement )
-
-		createMarker( google, map, markets[0].latLng, 'a', markets[0].name );
-		map.panTo(markets[0].latLng);
-
-		console.log(markets.map( market=>market.latLng ));
-		/*
-		this.markers = markets.map( (market,index)=>
-			createMarker( google, map, market.latLng, index, market.name )
+		
+		this.markers = markets.slice(0,5).map( (market,index)=>
+			createMarker( google, map, market.latLng, ''+index, market.name )
 		)
-		*/
 	}
 }
 
+new Start();
 
-const start = new Start();
-window.initMap = start.init;
