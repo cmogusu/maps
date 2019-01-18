@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshots!! -  creates 1st snapshot 1`] = `
+Array [
+  <span
+    className="absolute bottom left right z-index-1 opacity-8"
+  >
+    word of the day : 
+    what up ma niggas
+  </span>,
+  <br />,
+]
+`;
+
+exports[`Snapshots!! -  creates mutable snapshot 1`] = `
+Object {
+  "step1": "go to loo",
+  "step2": "open door",
+  "step3": "step inside",
+  "step4": Any<String>,
+  "step5": Any<Date>,
+}
+`;
