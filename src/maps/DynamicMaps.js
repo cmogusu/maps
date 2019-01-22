@@ -1,10 +1,15 @@
 import React from 'react';
 
 class DynamicMaps extends React.Component {
+  state = {
+    zoom: 15,
+  };
+
   constructor(props) {
     super(props);
 
     this.element = {};
+    this.setElement = this.setElement.bind(this);
     window.initMap = this.init.bind(this);
   }
 
@@ -69,7 +74,15 @@ class DynamicMaps extends React.Component {
     return (
       <div>
         <h1>Dynamic Map</h1>
-        <div ref={this.setElement} />
+        <div ref={this.setElement} style={{ height: '400px', backgroundColor: '#eee' }} />
+        <div className="row">
+          <div className="col-sm-6">
+            cost
+          </div>
+          <div className="col-sm-6">
+            $7 per 1000
+          </div>
+        </div>
       </div>
     );
   }

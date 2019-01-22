@@ -17,15 +17,10 @@
   <body>
     <div class="container">
       <h1>Custom Maps</h1>
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div class="row">
-        <div class="col-sm-6">
-          <div id="orange" style="background:orange;padding:10px;color:#fff;">hello</div>
-        </div>
-      </div>
       <div id="root"></div>
-      <script data-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGraz0piF8xyoi2zAdb8xKTooF_8wqunc&callback=initMap"
-      async defer></script>
     </div>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGraz0piF8xyoi2zAdb8xKTooF_8wqunc&callback=initMap&libraries=places"
+      async defer></script>
   </body>
 </html>

@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CostEstimator from './maps/CostEstimator.js';
-// import PlotPointsOnMap from './maps/PlotPointsOnMap.js';
+import DirectionsMap from './maps/DirectionsMap.js';
 
 
 const App = () => (
   <div>
-    <CostEstimator />
+    <DirectionsMap />
   </div>
 );
 

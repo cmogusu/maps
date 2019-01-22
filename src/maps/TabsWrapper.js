@@ -3,6 +3,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import DynamicMaps from '../maps/DynamicMaps.js';
 // import { makeStyles } from '@material-ui/styles';
 // import CostCheckbox from '../components/CostCheckbox.js';
 
@@ -61,15 +62,14 @@ class CostEstimator extends React.Component<Props, State> {
       <div className="">
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Time 1" />
+            <Tab label="Dynamic" />
             <Tab label="Time 2" />
             <Tab label="Time 3" />
           </Tabs>
         </AppBar>
-        { value === 1 && <TabContainer>Time 1</TabContainer> }
-        { value === 2 && <TabContainer>Time 2</TabContainer> }
-        { value === 3 && <TabContainer>Time 3</TabContainer> }
-        hei there ewere
+        { value === 0 && <TabContainer><DynamicMaps /></TabContainer> }
+        { value === 1 && <TabContainer>Time 2</TabContainer> }
+        { value === 2 && <TabContainer>Time 3</TabContainer> }
       </div>
     );
   }

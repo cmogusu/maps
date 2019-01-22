@@ -26,3 +26,18 @@ export const createInfoWindow = (google, html) => {
 export const createMarker = (google, map, position, label, title = 'Point of Interest') => new google.maps.Marker({
   map, position, label, title,
 });
+
+
+export const loadScript = (script) => {
+  const theScript = document.createElement('script');
+  theScript.setAttribute('src', script);
+  document.head.appendChild(theScript);
+};
+
+
+export const createMapsReadyEvent = () => {
+  window.initMap = () => {
+    const mapsReadyEvent = new Event('mapsReady');
+    window.dispatchEvent(mapsReadyEvent);
+  };
+};
